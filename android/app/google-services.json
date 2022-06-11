@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "77527135625",
+    "project_id": "notekeeperflutterddd",
+    "storage_bucket": "notekeeperflutterddd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77527135625:android:8787494a815fb4fdaf5d58",
+        "android_client_info": {
+          "package_name": "com.example.classpay_new"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77527135625-6q7o20ncbirk07241dui6nvbpiir3frr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3osyys5roJ5FqcTDRdWVKxwd8EF_Nt2s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77527135625-6q7o20ncbirk07241dui6nvbpiir3frr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
