@@ -1,5 +1,6 @@
 import 'package:classpay_new/domain/auth/auth_failure.dart';
 import 'package:classpay_new/domain/auth/i_auth_facade.dart';
+import 'package:classpay_new/domain/auth/user.dart' as User;
 import 'package:classpay_new/domain/auth/value_objects.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -58,5 +59,17 @@ class FirebaseAuthFacade implements IAuthFacade {
         return left(const AuthFailure.serverError());
       }
     }
+  }
+
+  @override
+  Future<User.User?> getSignInUser() {
+    // TODO: implement getSignInUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> signOut() {
+    // TODO: implement signOut
+    throw UnimplementedError();
   }
 }
