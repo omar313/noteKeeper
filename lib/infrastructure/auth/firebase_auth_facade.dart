@@ -1,10 +1,12 @@
 import 'package:classpay_new/domain/auth/auth_failure.dart';
 import 'package:classpay_new/domain/auth/i_auth_facade.dart';
-import 'package:classpay_new/domain/auth/user.dart' as User;
 import 'package:classpay_new/domain/auth/value_objects.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
+import 'firebase_user_map.dart';
+
+import '../../domain/auth/user.dart';
 
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
@@ -62,14 +64,12 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<User.User?> getSignInUser() {
-    // TODO: implement getSignInUser
-    throw UnimplementedError();
+  Future<DomainUser?> getSignInUser() async{
+    return _firebaseAuth.currentUser?.toDomain();
   }
 
   @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<void> signOut() async{
+    _firebaseAuth.signOut();
   }
 }
