@@ -21,19 +21,19 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final IAuthFacade _authFacade;
 
   SignInFormBloc(this._authFacade) : super(SignInFormState.initial()) {
-    on<SignInFormEvent>((event, emit) {
-      event.map(emailChanged: (e) async {
+    on<SignInFormEvent>((event, emit) async {
+     await event.map(emailChanged: (e) async {
         emit(state.copyWith(
             emailAddress: EmailAddress(e.emailStr),
             authFailureOrSuccess: null));
       }, passwordChanged: (e) async {
         emit(state.copyWith(
             password: Password(e.passStr), authFailureOrSuccess: null));
-      }, registerWithEmailAndPasswordPressed: (e) async {
-        _performActionOnAuthFacadeWithEmailAndPassword(
+      }, registerWithEmailAndPasswordPressed: (e)  async{
+        await _performActionOnAuthFacadeWithEmailAndPassword(
             emit, _authFacade.registerWithEmailAndPassword);
       }, signInWithEmailAndPasswordPressed: (e) async {
-        _performActionOnAuthFacadeWithEmailAndPassword(
+      await _performActionOnAuthFacadeWithEmailAndPassword(
             emit, _authFacade.signWithEmailAndPassword);
       }, signInWithGooglePressed: (e) async {
         emit(state.copyWith(authFailureOrSuccess: null, isSubmitting: true));
@@ -43,7 +43,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     });
   }
 
-  void _performActionOnAuthFacadeWithEmailAndPassword(
+  Future<void> _performActionOnAuthFacadeWithEmailAndPassword(
       Emitter<SignInFormState> emit,
       Future<Either<AuthFailure, Unit>> Function(
               {required EmailAddress emailAddress, required Password password})
@@ -52,10 +52,11 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     final isValidEmail = state.emailAddress.isValid;
     final isValidPassword = state.password.isValid;
 
-    if (isValidEmail && isValidPassword) {
+    if (isValidEmail && isValidPassword){
       emit(state.copyWith(isSubmitting: true, authFailureOrSuccess: null));
       result = await forwardCall(
           emailAddress: state.emailAddress, password: state.password);
+
     }
 
     emit(state.copyWith(
@@ -63,4 +64,6 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         authFailureOrSuccess: result,
         showErrorMessages: true));
   }
+
+
 }
