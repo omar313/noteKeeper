@@ -44,7 +44,24 @@ class NoteDto with _$NoteDto {
 
   factory NoteDto.fromJson(Map<String, dynamic> json) =>
       _$NoteDtoFromJson(json);
-  factory NoteDto.fromSnapshot(DocumentSnapshot snap) => NoteDto.fromJson(snap.data() as Map<String, dynamic>).copyWith(id: snap.id);
+
+  factory NoteDto.fromSnapshot(DocumentSnapshot snap) =>
+      NoteDto.fromJson(snap.data() as Map<String, dynamic>)
+          .copyWith(id: snap.id);
+}
+
+class ServerTimestampConverter implements JsonConverter<FieldValue, Object> {
+  const ServerTimestampConverter();
+
+  @override
+  FieldValue fromJson(Object json) {
+    return FieldValue.serverTimestamp();
+  }
+
+  @override
+  Object toJson(FieldValue object) {
+    return object;
+  }
 }
 
 @JsonSerializable()
